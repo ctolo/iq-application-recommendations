@@ -98,7 +98,9 @@ async def handle_component(component, applicationId, stage):
     if len(component["violations"]) > 0 and component["packageUrl"] != None:
         recommendation_task = asyncio.create_task( get_recommendation(component["packageUrl"], applicationId, stage) )
         recommendations = await recommendation_task
-
+        if recommendations is None: 
+            print(f"Recommendation NOT found for {component['displayName']} : {component['packageUrl']}")    
+            return False
         print(f"Adding recommendations for {component['displayName']}")
         for change in recommendations["remediation"]["versionChanges"]:
             remediation = { change["type"]: change["data"]["component"]["packageUrl"]}
