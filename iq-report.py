@@ -79,6 +79,7 @@ async def main():
                 "Report_Type": stage,
                 "Scan_Date": report["reportTime"],
                 "Threat_Score": violation["policyThreatLevel"],
+                "Reason": violation["reason"],
                 "Policy": violation["policyName"],
                 "Component_Name": component["displayName"],
                 "Status": violation["status"],
